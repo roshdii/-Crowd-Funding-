@@ -1,7 +1,9 @@
 ######################################
 ###### STANDALONE FUNCTIONS ##########
 ######################################	
-import re 
+import re
+import os 
+import csv
 email_regex = '\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+'
 mob_regex = "01[0125][0-9]*"
 
@@ -84,3 +86,28 @@ def enter_address():
 ###########################################
 ###### END OF STANDALONE FUNCS ############
 ###########################################
+
+##############################################################
+def check_dir(db_dir_name):
+	try :
+		l = os.listdir(db_dir_name)
+		if len(l) > 0 :
+			print("Done checking db/ no. of files = ",len(l))
+	except FileNotFoundError:
+		print("Error in accessing Database directory !!! Creating New db ")
+		os.mkdir(db_dir_name)
+
+def check_file(db_dir_name,db_file,dict_header):
+	try :
+		# check file is exist 
+		x = open(db_dir_name+"/"+db_file,'r')
+		x.close()
+	except:
+		# create new file if not exist 
+		n = open(db_dir_name+"/"+db_file,'a')
+		writer = csv.DictWriter(n, fieldnames=dict_header)
+		writer.writeheader()
+		n.close()
+
+def clear_screen():
+	os.system('clear')

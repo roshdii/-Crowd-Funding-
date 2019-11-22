@@ -14,6 +14,7 @@ class MENU :
 			print(str(idx)+"- "+i)
 			idx+= 1
 		print(self.closing_______line)
+		return self.get()
 
 	def get(self):
 		print("Enter no. or 'identical' Name of item to choose [0 to exit menu ]")
